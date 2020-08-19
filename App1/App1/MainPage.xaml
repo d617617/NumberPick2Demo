@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pancardview="clr-namespace:PanCardView;assembly=PanCardView" xmlns:app1="clr-namespace:App1"
+             x:Class="App1.MainPage">
+
+    <StackLayout>
+        <Button Text="测试"></Button>
+        <app1:NumberPicker2 HorizontalOptions="CenterAndExpand" BackgroundColor="LightYellow"
+                          WidthRequest="50"
+                           VerticalOptions="Start"></app1:NumberPicker2>
+    </StackLayout>
+
+</ContentPage>
