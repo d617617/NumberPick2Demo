@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -28,14 +29,14 @@ namespace App1.Droid
 
 
         WheelPicker wheelPicker;
-
+     
         protected override void OnElementChanged(ElementChangedEventArgs<NumberPicker2> e)
         {
             base.OnElementChanged(e);
             if (e.OldElement != null)
             {
                 // Unsubscribe
-
+                var ele = e.OldElement;
             }
             if (e.NewElement != null)
             {
@@ -45,8 +46,26 @@ namespace App1.Droid
                     wheelPicker = new WheelPicker(Context);
                     SetNativeControl(wheelPicker);
 
-                }// Subscribe              
+                }// Subscribe    
 
+            }
+        }
+
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+            if (e.PropertyName == nameof(NumberPicker2.CurrentItem))
+            {               
+                //拨动改变值后,防止递归
+                if (wheelPicker.CurrentItem == Element.CurrentItem)
+                {
+                    return;
+                }
+                if (!string.IsNullOrWhiteSpace(Element.CurrentItem))
+                {
+                    wheelPicker.SmoothScrollToValue(Element.CurrentItem);
+                }
             }
         }
 
@@ -56,12 +75,19 @@ namespace App1.Droid
 
             wheelPicker.SetWheelItemCount(3);
             wheelPicker.SetAdapter(new DaysAdapter());
-            wheelPicker.SetMin(0);
             wheelPicker.SetSelectorRoundedWrapPreferred(true);
             wheelPicker.ValueChange += WheelPicker_ValueChange;
-            wheelPicker.SetSelectedTextColor(Resource.Color.custmonColor);
-            //开始反射
-            var fss = wheelPicker.Class.GetDeclaredFields();
+            //开始反射,设定文字色,字号
+            ReflectionToSetValue();
+            //设定初始值
+            if (!string.IsNullOrWhiteSpace(Element.CurrentItem))
+            {
+                wheelPicker.ScrollToValue(Element.CurrentItem);
+            }
+        }
+
+        void ReflectionToSetValue()
+        {
             var _class = wheelPicker.Class;
             var des = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Density;
             var sizeField = _class.GetDeclaredField("mTextSize");
@@ -75,10 +101,14 @@ namespace App1.Droid
             unselecedColorField.Set(wheelPicker, (int)Element.UnSelectedTextColor.ToAndroid());
         }
 
-        private void WheelPicker_ValueChange(object sender, ValueChangeEventArgs e)
+        /// <summary>
+        /// 滚动时,currentitem值变化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void WheelPicker_ValueChange(object sender, ValueChangeEventArgs e)
         {
-            Element.SelectedIndex = int.Parse(e.NewVal) - 1;
-
+            Element.CurrentItem = e.NewVal;
         }
     }
 

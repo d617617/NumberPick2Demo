@@ -17,8 +17,13 @@ namespace App1
 
         protected override void OnAppearing()
         {
-         
-         
+
+
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            this.npk.CurrentItem = 20.ToString();
         }
     }
 }
