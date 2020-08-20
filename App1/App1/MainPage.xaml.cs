@@ -21,9 +21,6 @@ namespace App1
 
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            this.npk.CurrentItem = 20.ToString();
-        }
+      
     }
 }

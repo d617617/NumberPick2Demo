@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace App1
@@ -20,7 +20,7 @@ namespace App1
 
 
 
-        public event Action<object, EventArgs> CurrentItemChanged;        
+        public event Action<object, EventArgs> CurrentItemChanged;
 
         /// <summary>
         /// mvvm 选中的值
@@ -37,18 +37,46 @@ namespace App1
             CurrentItemChanged?.Invoke(this, new EventArgs());
         }
 
-        
-
         public string CurrentItem
         {
             get { return (string)GetValue(CurrentItemProperty); }
             set
-            {              
+            {
                 SetValue(CurrentItemProperty, value);
             }
         }
 
 
+        #region ChangeItemCommand
+        public static readonly BindableProperty ChangeItemCommandProperty =
+ BindableProperty.Create(nameof(ChangeItemCommand), typeof(ICommand), typeof(NumberPicker2), default(ICommand));
 
+        public ICommand ChangeItemCommand
+        {
+            get { return (ICommand)GetValue(ChangeItemCommandProperty); }
+            set
+            {
+                SetValue(ChangeItemCommandProperty, value);
+            }
+        } 
+        #endregion
+
+        public NumberPicker2()
+        {
+            ChangeItemCommand = new Command<string>(ChangeItemCommandExcute);
+        }
+
+        void ChangeItemCommandExcute(string newItem)
+        {
+            if (newItem == CurrentItem)
+            {
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(newItem))
+            {
+                return;
+            }
+            CurrentItem = newItem;
+        }
     }
 }

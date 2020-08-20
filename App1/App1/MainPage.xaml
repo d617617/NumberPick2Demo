@@ -6,10 +6,10 @@
     <StackLayout>
         <Label Text="{Binding Source={Reference npk},Path=CurrentItem}"></Label>
         <app1:NumberPicker2  x:Name="npk" CurrentItem="10"
-            HorizontalOptions="CenterAndExpand" BackgroundColor="LightYellow"
-                          WidthRequest="50" 
+            HorizontalOptions="CenterAndExpand" BackgroundColor="LightYellow"                         
                            VerticalOptions="Start"></app1:NumberPicker2>
-        <Button Text="跳转到20" Clicked="Button_Clicked"></Button>
+        <Button Text="跳转到20" Command="{Binding Source={Reference npk},Path=ChangeItemCommand}"
+                                CommandParameter="20"></Button>
     </StackLayout>
 
 </ContentPage>
