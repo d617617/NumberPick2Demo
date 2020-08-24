@@ -54,8 +54,8 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CardsView">
-      <Version>2.6.3</Version>
+    <PackageReference Include="Jaeger.StatusBarUtil">
+      <Version>1.4.0</Version>
     </PackageReference>
     <PackageReference Include="Karamunting.Android.SuperRabbitD.NumberPicker">
       <Version>1.0.1</Version>

@@ -43,7 +43,7 @@ namespace App1.Droid
                 var ele = e.NewElement;
                 if (Control == null)
                 {
-                    wheelPicker = new WheelPicker(Context);
+                    wheelPicker = new WheelPicker(Context);                    
                     SetNativeControl(wheelPicker);
 
                 }// Subscribe    
@@ -73,7 +73,7 @@ namespace App1.Droid
         {
             base.OnAttachedToWindow();
 
-            wheelPicker.SetWheelItemCount(3);
+            wheelPicker.SetWheelItemCount(3);            
             wheelPicker.SetAdapter(new DaysAdapter());
             wheelPicker.SetSelectorRoundedWrapPreferred(true);
             wheelPicker.ValueChange += WheelPicker_ValueChange;
@@ -90,9 +90,9 @@ namespace App1.Droid
         {
             var _class = wheelPicker.Class;
             var des = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Density;
-            var sizeField = _class.GetDeclaredField("mTextSize");
-            sizeField.Accessible = true;
-            sizeField.Set(wheelPicker, (int)Math.Ceiling(Element.FontSize * des));
+            //var sizeField = _class.GetDeclaredField("mTextSize");
+            //sizeField.Accessible = true;
+            //sizeField.Set(wheelPicker, (int)Math.Ceiling(Element.FontSize * des));
             var selecedColorField = _class.GetDeclaredField("mSelectedTextColor");
             selecedColorField.Accessible = true;
             selecedColorField.Set(wheelPicker, (int)Element.SelectedColor.ToAndroid());

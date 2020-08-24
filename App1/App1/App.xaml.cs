@@ -9,8 +9,11 @@ namespace App1
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            //MainPage = new NavigationPage(new MainPage())
+            //{
+            //    BarTextColor=Color.Red               
+            //};
+            MainPage = new MasterDetailPage1();
         }
 
         protected override void OnStart()
