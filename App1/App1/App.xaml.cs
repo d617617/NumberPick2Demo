@@ -13,7 +13,7 @@ namespace App1
             //{
             //    BarTextColor=Color.Red               
             //};
-            MainPage = new MasterDetailPage1();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

@@ -13,15 +13,24 @@ namespace App1
         public MainPage()
         {
             InitializeComponent();
-            
+
         }
 
         protected override void OnAppearing()
         {
-
-
+        
+            testCircle.Progress = 0;
         }
 
-      
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(2),
+            () =>
+            {
+                testCircle.Progress += .05f;
+                return true;
+            });
+            //testCircle.Progress += .05f;
+        }
     }
 }

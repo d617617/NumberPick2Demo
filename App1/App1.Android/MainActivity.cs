@@ -23,7 +23,7 @@ namespace App1.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            Jaeger.StatusBarUtil.SetTranslucentForCoordinatorLayout(this, 0);
+            //Jaeger.StatusBarUtil.SetTranslucentForCoordinatorLayout(this, 0);
             
             View decor = Window.DecorView;
             //强转即可

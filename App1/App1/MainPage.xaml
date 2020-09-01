@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:app1="clr-namespace:App1"
+             xmlns:app1="clr-namespace:App1" xmlns:controls="clr-namespace:Refresh.Controls"
              Title="测试页面"
              
              x:Class="App1.MainPage">
     <StackLayout>
-
+        <controls:CircleCountdown HeightRequest="200" x:Name="testCircle"></controls:CircleCountdown>
         <Label Text="{Binding Source={Reference npk},Path=CurrentItem}"></Label>
         <app1:NumberPicker2  x:Name="npk" FontSize="50"
             HorizontalOptions="CenterAndExpand" BackgroundColor="LightYellow"                         
                            VerticalOptions="Start"></app1:NumberPicker2>
         <Button Text="跳转到20" Command="{Binding Source={Reference npk},Path=ChangeItemCommand}"
+                Clicked="Button_Clicked"
                                 CommandParameter="20"></Button>
     </StackLayout>
 </ContentPage>
